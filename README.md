@@ -1,16 +1,25 @@
-# React + Vite
+# TankMaster 💧
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A professional inventory and sales management dashboard for water refilling businesses. Built to handle real-time tank tracking and automated billing logic.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
+https://hoiregeno.github.io/TankMaster
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠 Features
+- **Smart Inventory:** Real-time tank level tracking with a "Top-Up" refill logic that prevents overflow.
+- **Automated Pricing:** - Standard Rate: K0.50 per Liter.
+  - Tiered Discount: 20L bulk-buy fixed at K7.00.
+- **Financial Ledger:** Track total revenue, collected cash, and outstanding customer debt.
+- **Local Persistence:** Data is saved to the browser's `localStorage`—no database setup required.
+- **Mobile Optimized:** Responsive grid layout designed for use on-site via tablet or smartphone.
 
-## React Compiler
+## 🏗 Tech Stack
+- **Framework:** React.js (Vite)
+- **State:** Custom Hooks with Persistent Storage
+- **Styling:** CSS Modules (Bento-box UI)
+- **Deployment:** GitHub Pages
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📦 Installation & Setup
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/hoiregeno/tank-master.git
