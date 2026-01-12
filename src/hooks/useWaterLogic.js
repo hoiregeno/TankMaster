@@ -59,13 +59,15 @@ export const useWaterLogic = () => {
 
   const refillTank = () => {
     const spaceLeft = CAPACITY - currentLevel;
+
     if (spaceLeft <= 0) {
       alert("Tank is already full");
       return;
     }
 
-    if (window.confirm(`Add ${CAPACITY}L to the current tank?`)) {
-      setTotalAdded((prev) => prev + CAPACITY);
+    // USE spaceLeft instead of CAPACITY
+    if (window.confirm(`Top up the tank with ${spaceLeft}L?`)) {
+      setTotalAdded((prev) => prev + spaceLeft);
     }
   };
 
