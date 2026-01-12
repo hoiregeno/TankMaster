@@ -1,0 +1,49 @@
+.historyContainer {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 20px;
+  max-height: 400px; /* Doom-scroll prevention */
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.table th {
+  position: sticky;
+  top: 0;
+  background: var(--card-bg);
+  z-index: 2;
+  text-align: left;
+  padding: 12px 8px;
+  color: var(--text-primary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.table td {
+  padding: 12px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.btnDebt {
+  background: var(--danger);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+}
+.btnPaid {
+  background: rgba(74, 222, 128, 0.1);
+  color: var(--success);
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+}
+.paidRow {
+  opacity: 0.5;
+}

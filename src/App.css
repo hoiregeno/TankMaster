@@ -1,0 +1,93 @@
+.title {
+  text-align: center;
+  margin: 1rem 0 2rem 0;
+  color: var(--accent);
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.dashboard {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.5rem;
+  /* Area Mapping */
+  grid-template-areas:
+    "tank form"
+    "tank stats"
+    "history history";
+  grid-template-columns: 1fr 1.5fr;
+}
+
+/* Manual mapping to children since they are custom components */
+.dashboard > :nth-child(1) {
+  grid-area: tank;
+}
+.dashboard > :nth-child(2) {
+  grid-area: form;
+}
+.dashboard > :nth-child(3) {
+  grid-area: stats;
+}
+.dashboard > :nth-child(4) {
+  grid-area: history;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.stat-card {
+  background: var(--card-bg);
+  padding: 1.2rem;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.danger-zone {
+  grid-area: footer; /* You can add "footer" to your grid-template-areas */
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px dashed rgba(251, 113, 133, 0.3);
+  display: flex;
+  justify-content: center;
+}
+
+.reset-btn {
+  background: transparent;
+  color: var(--text-dim);
+  border: none;
+  font-size: 0.8rem;
+  text-decoration: underline;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.reset-btn:hover {
+  color: var(--danger);
+  opacity: 1;
+}
+
+/* RESPONSIVE: Mobile Layout */
+@media (max-width: 850px) {
+  .dashboard {
+    grid-template-areas:
+      "tank"
+      "stats"
+      "form"
+      "history";
+    grid-template-columns: 1fr;
+    max-width: 500px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr); /* Keep horizontal to save height */
+    font-size: 0.75rem;
+  }
+}

@@ -1,0 +1,69 @@
+.tankContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.tankShell {
+  width: 100px;
+  height: 200px;
+  /* Use the darker background variable for the "hollow" look */
+  background: var(--bg-dark);
+  border: 2px solid var(--accent);
+  border-radius: 12px 12px 24px 24px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column-reverse;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.waterFill {
+  width: 100%;
+  background: linear-gradient(180deg, var(--accent) 0%, #0284c7 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Smooth "heavy" liquid transition */
+  transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+.waterFill span {
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.tankContainer p {
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+.tankContainer strong {
+  color: var(--accent);
+}
+
+.refillBtn {
+  margin-top: 1rem;
+  background: transparent;
+  border: 1px solid var(--success);
+  color: var(--success);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.refillBtn:hover {
+  background: var(--success);
+  color: var(--bg-dark);
+  box-shadow: 0 0 15px rgba(74, 222, 128, 0.4);
+}
