@@ -1,39 +1,39 @@
 import { useState, useEffect } from "react";
 
+// --- Configuration ---
 const CAPACITY = 5000;
 const PRICE_PER_LITER = 0.5;
 const RATES = { 5: 2, 10: 4, 20: 7, 50: 15 };
+const STORAGE_KEYS = {
+  SALES: "tank_master_sales",
+  TOTAL_ADDED: "tank_master_total_added",
+};
 
 export const useWaterLogic = () => {
+  // --- State (Lazy Initialization) ---
   const [sales, setSales] = useState(() => {
-    const saved = localStorage.getItem("tank_master_sales");
+    const saved = localStorage.getItem(STORAGE_KEYS.SALES);
     return saved ? JSON.parse(saved) : [];
   });
 
-  // Track total added water (persistence is key)
   const [totalAdded, setTotalAdded] = useState(() => {
-    const saved = localStorage.getItem("tank_master_total_added");
+    const saved = localStorage.getItem(STORAGE_KEYS.TOTAL_ADDED);
     return saved ? Number(saved) : CAPACITY;
   });
 
-  // 1. Math: Volume Logic
+  // --- Math & Derived State ---
+  // 1. Volume Logic
   const totalLitersSold = sales.reduce((sum, s) => sum + Number(s.liters), 0);
   const currentLevel = totalAdded - totalLitersSold;
 
-  // 2. Math: Financial Logic
+  // 2. Financial Logic
   const totalRevenue = sales.reduce((sum, s) => sum + Number(s.price), 0);
   const amountCollected = sales
     .filter((s) => s.isPaid)
     .reduce((sum, s) => sum + Number(s.price), 0);
   const outstandingDebt = totalRevenue - amountCollected;
 
-  // 3. Persistence
-  useEffect(() => {
-    localStorage.setItem("tank_master_sales", JSON.stringify(sales));
-    localStorage.setItem("tank_master_total_added", totalAdded.toString());
-  }, [sales, totalAdded]);
-
-  // 4. Actions
+  // --- Actions ---
   const addSale = (customerName, liters, isPaid) => {
     const amount = Number(liters);
 
@@ -43,7 +43,6 @@ export const useWaterLogic = () => {
     }
 
     const calculatedPrice = RATES[amount] || amount * PRICE_PER_LITER;
-
     const newSale = {
       id: Date.now(),
       customerName,
@@ -65,18 +64,17 @@ export const useWaterLogic = () => {
       return;
     }
 
-    if (window.confirm(`Top up tank? Adding ${amountNeeded}L to the tank.`)) {
+    if (window.confirm(`Top up tank? Adding ${amountNeeded}L.`)) {
       setTotalAdded((prev) => prev + amountNeeded);
     }
   };
 
   const togglePaymentStatus = (salesId) => {
-    setSales(
-      sales.map((s) => (s.id === salesId ? { ...s, isPaid: !s.isPaid } : s))
+    setSales((prevSales) =>
+      prevSales.map((s) => (s.id === salesId ? { ...s, isPaid: !s.isPaid } : s))
     );
   };
 
-  // The "Nuclear" Reset (only for starting a new year/session)
   const resetEverything = () => {
     if (window.confirm("ERASE ALL DATA? This clears history and debt!")) {
       setSales([]);
@@ -84,16 +82,27 @@ export const useWaterLogic = () => {
     }
   };
 
+  // --- Effects ---
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEYS.SALES, JSON.stringify(sales));
+    localStorage.setItem(STORAGE_KEYS.TOTAL_ADDED, totalAdded.toString());
+  }, [sales, totalAdded]);
+
+  // --- Public Interface ---
   return {
     capacity: CAPACITY,
     currentLevel,
     sales,
-    totalRevenue: totalRevenue.toFixed(2),
-    amountCollected: amountCollected.toFixed(2),
-    outstandingDebt: outstandingDebt.toFixed(2),
-    addSale,
-    refillTank,
-    togglePaymentStatus,
-    resetEverything,
+    stats: {
+      revenue: totalRevenue.toFixed(2),
+      collected: amountCollected.toFixed(2),
+      debt: outstandingDebt.toFixed(2),
+    },
+    actions: {
+      addSale,
+      refillTank,
+      togglePaymentStatus,
+      resetEverything,
+    },
   };
 };
