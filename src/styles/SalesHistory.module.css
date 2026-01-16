@@ -15,11 +15,11 @@
 
 .table th {
   position: sticky;
-  top: 0;
+  top: -25px;
   background: var(--card-bg);
   z-index: 2;
   text-align: left;
-  padding: 12px 8px;
+  padding: 12px 0;
   color: var(--text-primary);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
