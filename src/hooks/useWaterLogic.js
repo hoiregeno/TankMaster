@@ -18,7 +18,7 @@ export const useWaterLogic = () => {
 
   const [totalAdded, setTotalAdded] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEYS.TOTAL_ADDED);
-    return saved ? Number(saved) : CAPACITY;
+    return saved ? Number(saved) : 0;
   });
 
   // --- Math & Derived State ---
@@ -78,7 +78,7 @@ export const useWaterLogic = () => {
   const resetEverything = () => {
     if (window.confirm("ERASE ALL DATA? This clears history and debt!")) {
       setSales([]);
-      setTotalAdded(CAPACITY);
+      setTotalAdded(0);
     }
   };
 
