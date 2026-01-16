@@ -7,13 +7,8 @@ const App = () => {
     currentLevel,
     capacity,
     sales,
-    totalRevenue,
-    amountCollected,
-    outstandingDebt,
-    refillTank,
-    addSale,
-    togglePaymentStatus,
-    resetEverything,
+    stats, // New grouped object
+    actions, // New grouped object
   } = useWaterLogic();
 
   return (
@@ -24,22 +19,25 @@ const App = () => {
         <TankStatus
           currentLevel={currentLevel}
           capacity={capacity}
-          refillTank={refillTank}
+          refillTank={actions.refillTank}
         />
 
-        <OrderForm addSale={addSale} />
+        <OrderForm addSale={actions.addSale} />
 
         <div className="stats-grid">
-          <div className="stat-card">Revenue: K{totalRevenue}</div>
-          <div className="stat-card">Cash: K{amountCollected}</div>
-          <div className="stat-card">Debt: K{outstandingDebt}</div>
+          <div className="stat-card">Revenue: K{stats.revenue}</div>
+          <div className="stat-card">Cash: K{stats.collected}</div>
+          <div className="stat-card">Debt: K{stats.debt}</div>
         </div>
 
-        <SalesHistory sales={sales} togglePaymentStatus={togglePaymentStatus} />
+        <SalesHistory
+          sales={sales}
+          togglePaymentStatus={actions.togglePaymentStatus}
+        />
       </div>
 
       <div className="danger-zone">
-        <button onClick={resetEverything} className="reset-btn">
+        <button onClick={actions.resetEverything} className="reset-btn">
           Reset All Data
         </button>
       </div>

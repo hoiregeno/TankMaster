@@ -18,9 +18,8 @@ const TankStatus = ({ currentLevel, capacity, refillTank }) => {
         Available: <strong>{currentLevel}L</strong>
       </p>
 
-      {/* The Refill Button */}
       <button onClick={refillTank} className={styles.refillBtn}>
-        Refill +{capacity}L
+        Top Up Tank
       </button>
     </div>
   );
